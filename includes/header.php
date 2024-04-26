@@ -21,5 +21,5 @@
 	<link href="<?=urlOf('assets/css/app.css')?>" rel="stylesheet">
 	<link href="<?=urlOf('assets/css/icons.css')?>" rel="stylesheet">
 	
-	<title>Dashtrans - Bootstrap5 Admin Template</title>
+	<title>Hotel-Management-System</title>
 </head>
