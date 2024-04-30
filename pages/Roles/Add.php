@@ -39,7 +39,6 @@ include pathOf('includes/navbar.php');
 													<input type="text" class="form-control border-end-0" id="name"  placeholder="Enter Role Name">
 											</div>
 											
-											
 											<div class="col-12">
 												<div class="d-grid">
 													<button type="submit" class="btn btn-light" onclick="sendData()">ADD</button>
@@ -64,7 +63,6 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
-include pathOf('includes/pageEnd.php');
 
 ?>
 
@@ -78,8 +76,17 @@ include pathOf('includes/pageEnd.php');
 			},
 			success: function (response){
 				if(response == 0)
-				return Windows
+				// return window.location  = '../../pages/Roles/index.php';
+
+				window.alert("Role Added.....");
+                window.location.href = '../../pages/Roles/index.php';
 			}
 		})
 	}
 </script>
+
+<?php
+
+include pathOf('includes/pageEnd.php');
+
+?>

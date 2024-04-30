@@ -4,7 +4,14 @@ require ('../../includes/init.php');
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
+$query="SELECT * FROM `roles`";
+$row = select($query);
+
+$index=0;
+$userPermission;
+
 ?>
+
 
 		   <!--end header wrapper-->
 		<!--start page wrapper -->
@@ -43,12 +50,16 @@ include pathOf('includes/navbar.php');
 									</tr>
 								</thead>
 								<tbody>
+									<?php foreach($row as $data) {?>
 									<tr>
-										<td>10</td>
-										<td>Manager</td>
+										<td><?= $index++ ?></td>
+										<td><?= $data['Name'] ?></td>
 										<td><a href="Update.php" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
+										<?php  if($userPermission['DeletePermission'] == 1) {?>
+										<td><a href="../../api/Roles/delete.php?deleteid=<?= $data['Id']?>" class="btn btn-danger active" aria-current="page" onclick="deleteData(<?= $data['Id']?>)">Delete</a></td>
+										<?php } ?>
 									</tr>
+									<?php }?>
 								<tfoot>
 								<tr>
 										<th>Sr.No</th>
@@ -66,6 +77,32 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+
+?>
+
+<script>
+	function deleteData(id){
+		confirmation = confirm("Are you sure you want to delte thid Role....????");
+		if(!confirmation)
+		return;
+
+		$.post('../../api/Roles/delete.php'){
+			id : id
+		},
+		success:function(response){
+			if(response == 0)
+			return window.location = '../../pages/Roles/index.php';
+
+			window.alert("Role Deleted....!!!");
+                window.location.href = '../../pages/Roles/index.php';
+
+		}
+	}
+</script>
+
+
+<?php
+
 include pathOf('includes/pageEnd.php');
 
 ?>
