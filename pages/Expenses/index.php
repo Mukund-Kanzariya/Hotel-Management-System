@@ -22,6 +22,9 @@ include pathOf('includes/navbar.php');
 							</ol>
 						</nav>
 					</div>
+					<div class="ms-auto">
+							<button type="button" class="btn btn-light"><a href="Add">ADD EXPENSE</a></button>
+					</div>
 					
 				</div>
 				<!--end breadcrumb-->
@@ -45,7 +48,7 @@ include pathOf('includes/navbar.php');
 										<td>10</td>
 										<td>Light Bill</td>
 										<td>50000</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
+										<td><a href="Update" class="btn btn-primary active" aria-current="page">Update</a></td>
 										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
 									</tr>
 								<tfoot>

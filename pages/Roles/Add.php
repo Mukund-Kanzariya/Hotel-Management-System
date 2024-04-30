@@ -35,10 +35,6 @@ include pathOf('includes/navbar.php');
 									<div class="form-body">
 										<form class="row g-3">
 											<div class="col-12">
-												<label for="inputEmailAddress" class="form-label">Sr.No</label>
-												<input type="text" class="form-control" id="id" placeholder="Enter Sr.No">
-											</div>
-											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Name</label>
 													<input type="text" class="form-control border-end-0" id="name"  placeholder="Enter Role Name">
 											</div>
@@ -46,7 +42,7 @@ include pathOf('includes/navbar.php');
 											
 											<div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-light">ADD</button>
+													<button type="submit" class="btn btn-light" onclick="sendData()">ADD</button>
 												</div>
 											</div>
 											
@@ -71,3 +67,19 @@ include pathOf('includes/scripts.php');
 include pathOf('includes/pageEnd.php');
 
 ?>
+
+<script>
+	function sendData(){
+		$.ajax({
+			url:"../../api/Roles/insert.php",
+			type:"POST",
+			data: {
+				name: $('#name').val()
+			},
+			success: function (response){
+				if(response == 0)
+				return Windows
+			}
+		})
+	}
+</script>

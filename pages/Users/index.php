@@ -22,6 +22,9 @@ include pathOf('includes/navbar.php');
 							</ol>
 						</nav>
 					</div>
+					<div class="ms-auto">
+							<button type="button" class="btn btn-light"><a href="Add.php">ADD USER</a></button>
+					</div>
 					
 				</div>
 				<!--end breadcrumb-->
@@ -51,157 +54,7 @@ include pathOf('includes/navbar.php');
 										<td>61</td>
 										<td>2011/04/25</td>
 										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
+										<td><a href="Update.php" class="btn btn-primary active" aria-current="page">Update</a></td>
 										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
 									</tr>
 								<tfoot>

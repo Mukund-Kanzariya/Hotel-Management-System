@@ -22,6 +22,9 @@ include pathOf('includes/navbar.php');
 							</ol>
 						</nav>
 					</div>
+					<div class="ms-auto">
+							<button type="button" class="btn btn-light"><a href="Add.php">ADD GUEST</a></button>
+					</div>
 					
 				</div>
 				<!--end breadcrumb-->
@@ -59,157 +62,21 @@ include pathOf('includes/navbar.php');
 										<td>2024/11/15</td>
 										<td>10000</td>
 										<td>ha ha</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>12</td>
-										<td>test</td>
-										<td>9909956026</td>
-										<td>jamnagar</td>
-										<td>test@gmail.com</td>
-										<td>2024/11/11</td>
-										<td>2024/11/15</td>
-										<td>10000</td>
-										<td>ha ha</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>12</td>
-										<td>test</td>
-										<td>9909956026</td>
-										<td>jamnagar</td>
-										<td>test@gmail.com</td>
-										<td>2024/11/11</td>
-										<td>2024/11/15</td>
-										<td>10000</td>
-										<td>ha ha</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>12</td>
-										<td>test</td>
-										<td>9909956026</td>
-										<td>jamnagar</td>
-										<td>test@gmail.com</td>
-										<td>2024/11/11</td>
-										<td>2024/11/15</td>
-										<td>10000</td>
-										<td>ha ha</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>12</td>
-										<td>test</td>
-										<td>9909956026</td>
-										<td>jamnagar</td>
-										<td>test@gmail.com</td>
-										<td>2024/11/11</td>
-										<td>2024/11/15</td>
-										<td>10000</td>
-										<td>ha ha</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>12</td>
-										<td>test</td>
-										<td>9909956026</td>
-										<td>jamnagar</td>
-										<td>test@gmail.com</td>
-										<td>2024/11/11</td>
-										<td>2024/11/15</td>
-										<td>10000</td>
-										<td>ha ha</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>12</td>
-										<td>test</td>
-										<td>9909956026</td>
-										<td>jamnagar</td>
-										<td>test@gmail.com</td>
-										<td>2024/11/11</td>
-										<td>2024/11/15</td>
-										<td>10000</td>
-										<td>ha ha</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>12</td>
-										<td>test</td>
-										<td>9909956026</td>
-										<td>jamnagar</td>
-										<td>test@gmail.com</td>
-										<td>2024/11/11</td>
-										<td>2024/11/15</td>
-										<td>10000</td>
-										<td>ha ha</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>12</td>
-										<td>test</td>
-										<td>9909956026</td>
-										<td>jamnagar</td>
-										<td>test@gmail.com</td>
-										<td>2024/11/11</td>
-										<td>2024/11/15</td>
-										<td>10000</td>
-										<td>ha ha</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>12</td>
-										<td>test</td>
-										<td>9909956026</td>
-										<td>jamnagar</td>
-										<td>test@gmail.com</td>
-										<td>2024/11/11</td>
-										<td>2024/11/15</td>
-										<td>10000</td>
-										<td>ha ha</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>12</td>
-										<td>test</td>
-										<td>9909956026</td>
-										<td>jamnagar</td>
-										<td>test@gmail.com</td>
-										<td>2024/11/11</td>
-										<td>2024/11/15</td>
-										<td>10000</td>
-										<td>ha ha</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
+										<td><a href="Update.php" class="btn btn-primary active" aria-current="page">Update</a></td>
 										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
 									</tr>
 								<tfoot>
 								<tr>
 										<th>Sr.No</th>
-										<th>RoleName</th>
+										<th>AllotedRoomNo</th>
 										<th>Name</th>
 										<th>Mobile</th>
-										<th>Salary</th>
+										<th>Address</th>
 										<th>E-mail</th>
+										<th>CheckInTime</th>
+										<th>CheckOutTime</th>
+										<th>TotalPrice</th>
+										<th>IdentityImageFile</th>
 										<th>Modify</th>
 										<th>Delete</th>
 									</tr>

@@ -22,10 +22,13 @@ include pathOf('includes/navbar.php');
 							</ol>
 						</nav>
 					</div>
+					<div class="ms-auto">
+							<button type="button" class="btn btn-light"><a href="Add">ADD ROOM</a></button>
+					</div>
 					
 				</div>
 				<!--end breadcrumb-->
-				<h6 class="mb-0 text-uppercase">GUESTS DATA</h6>
+				<h6 class="mb-0 text-uppercase">ROOMS DATA</h6>
 				<hr/>
 				<div class="card">
 					<div class="card-body">
@@ -49,7 +52,7 @@ include pathOf('includes/navbar.php');
 										<td>25</td>
 										<td>2000</td>
 										<td>yes</td>
-										<td><a href="#" class="btn btn-primary active" aria-current="page">Update</a></td>
+										<td><a href="Update" class="btn btn-primary active" aria-current="page">Update</a></td>
 										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
 									</tr>
 								<tfoot>
