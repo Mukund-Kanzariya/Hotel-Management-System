@@ -1,6 +1,11 @@
 <?php
 
 require ('../../includes/init.php');
+
+$query="SELECT * FROM `modules`";
+$row=select($query);
+$index=1;
+
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
@@ -43,12 +48,14 @@ include pathOf('includes/navbar.php');
 									</tr>
 								</thead>
 								<tbody>
+									<?php foreach($row as $data) { ?>
 									<tr>
-										<td>10</td>
-										<td>Guest</td>
-										<td><a href="Update.php" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
+										<td><?= $index++ ?></td>
+										<td><?= $data['Name'] ?></td>
+										<td><a href="Update.php?updateid=<?=$data['Id']?>" class="btn btn-primary active" aria-current="page">Update</a></td>
+										<td><button type="button" class="btn btn-danger active" aria-current="page" onclick="deleteData(<?= $data['Id']?>)">Delete</button></td>
 									</tr>
+									<?php } ?>
 								<tfoot>
 								<tr>
 										<th>Sr.No</th>
@@ -66,6 +73,28 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+
+?>
+
+<script>
+	function deleteData(id){
+		if(confirm("Are you sure you want delete this data....??"));
+
+		$.post('../../api/Modules/delete.php',{
+			id:id,
+			success:function(response){
+				if(response==0)
+				return window.location='../../pages/Modules';
+
+				window.alert("Module deleted successfully....!!!");
+				window.location.href='../../pages/Modules';
+			}
+		})
+	}
+</script>
+
+<?php
+
 include pathOf('includes/pageEnd.php');
 
 ?>
