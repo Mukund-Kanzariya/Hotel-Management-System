@@ -1,14 +1,14 @@
 <?php
 
 require ('../../includes/init.php');
-include pathOf('includes/header.php');
-include pathOf('includes/navbar.php');
 
 $query="SELECT * FROM `roles`";
 $row = select($query);
 
-$index=0;
-$userPermission;
+$index=1;
+
+include pathOf('includes/header.php');
+include pathOf('includes/navbar.php');
 
 ?>
 
@@ -54,10 +54,8 @@ $userPermission;
 									<tr>
 										<td><?= $index++ ?></td>
 										<td><?= $data['Name'] ?></td>
-										<td><a href="Update.php" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<?php  if($userPermission['DeletePermission'] == 1) {?>
-										<td><a href="../../api/Roles/delete.php?deleteid=<?= $data['Id']?>" class="btn btn-danger active" aria-current="page" onclick="deleteData(<?= $data['Id']?>)">Delete</a></td>
-										<?php } ?>
+										<td><a href="Update.php?updateid=<?= $data['Id']?>" class="btn btn-primary active" aria-current="page">Update</a></td>
+										<td><button class="btn btn-danger" type="button" onclick="deleteData(<?= $data['Id']?>)">Delete</button></td>
 									</tr>
 									<?php }?>
 								<tfoot>
@@ -81,23 +79,18 @@ include pathOf('includes/scripts.php');
 ?>
 
 <script>
-	function deleteData(id){
-		confirmation = confirm("Are you sure you want to delte thid Role....????");
-		if(!confirmation)
-		return;
+    function deleteData(id){
+        confirmation = confirm("Are you sure you want to delete this Role..???");
+        if (!confirmation)
+            return;
 
-		$.post('../../api/Roles/delete.php'){
-			id : id
-		},
-		success:function(response){
-			if(response == 0)
-			return window.location = '../../pages/Roles/index.php';
-
-			window.alert("Role Deleted....!!!");
-                window.location.href = '../../pages/Roles/index.php';
-
-		}
-	}
+        $.post('../../api/Roles/delete.php', { 
+			id: id }, 
+		function(response) {
+            window.alert("Role Deleted....!!!");
+            window.location.href = '../../pages/Roles/index.php';
+        });
+    }
 </script>
 
 

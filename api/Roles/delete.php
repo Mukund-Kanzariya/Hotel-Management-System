@@ -1,8 +1,8 @@
 <?php
 
-$id=$_GET['deleteid'];
-
 require('../../includes/init.php');
+
+$id=$_POST['id'];
 
 $query="DELETE FROM `roles` WHERE Id=?";
 $param=[$id];

@@ -74,12 +74,9 @@ include pathOf('includes/scripts.php');
 			data: {
 				name: $('#name').val()
 			},
-			success: function (response){
-				if(response == 0)
-				// return window.location  = '../../pages/Roles/index.php';
-
-				window.alert("Role Added.....");
-                window.location.href = '../../pages/Roles/index.php';
+			success:function(response) {
+            window.alert("Role Added.......");
+            window.location.href = '../../pages/Roles/index.php';
 			}
 		})
 	}

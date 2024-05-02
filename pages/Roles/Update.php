@@ -1,6 +1,13 @@
 <?php
 
 require('../../includes/init.php');
+
+$id=$_GET['updateid'];
+
+$query="SELECT * FROM `roles` WHERE Id=?";
+$param=[$id];
+$row=selectOne($query,$param);
+
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
@@ -34,19 +41,14 @@ include pathOf('includes/navbar.php');
 									</div>
 									<div class="form-body">
 										<form class="row g-3">
-											<div class="col-12">
-												<label for="inputEmailAddress" class="form-label">Sr.No</label>
-												<input type="text" class="form-control" id="id" >
-											</div>
+											<input type="hidden" id="id" value="<?= $id ?>">
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Name</label>
-													<input type="text" class="form-control border-end-0" id="name"  >
+													<input type="text" class="form-control border-end-0" id="name" value="<?= $row['Name']?>">
 											</div>
-											
-											
 											<div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-light">UPDATE</button>
+													<button type="button" class="btn btn-light" onclick="updateData()">UPDATE</button>
 												</div>
 											</div>
 											
@@ -68,6 +70,36 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+
+?>
+
+<script>
+	function updateData(){
+
+		$.ajax({
+			url:'../../api/Roles/update.php',
+			type:'POST',
+			data: {
+				id:$('#id').val(),
+				name:$('#name').val()
+			},
+			success:function(response){
+				// console.log(response);
+				if(response == 0)
+				// return window.location='../../pages/Roles/index.php';
+
+				
+				window.alert("Data Updated Successfully......");
+				window.location.href='../../pages/Roles/index.php';
+			}
+		})
+	}
+</script>
+
+
+
+<?php
+
 include pathOf('includes/pageEnd.php');
 
 ?>
