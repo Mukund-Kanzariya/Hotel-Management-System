@@ -9,7 +9,7 @@ include pathOf('includes/navbar.php');
 	<div class="page-wrapper">
 			<div class="page-content">
 		<div class="section-authentication-cover">
-			<div class="">
+			<div class=""> 
 				<div class="row g-0">
 
 					<div class="col-12 col-xl-7 col-xxl-8 auth-cover-left align-items-center justify-content-center d-none d-xl-flex">
@@ -34,17 +34,17 @@ include pathOf('includes/navbar.php');
 									</div>
 									<div class="form-body">
 										<form class="row g-3">
-											<div class="col-12">
+											<!-- <div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Sr.No</label>
 												<input type="text" class="form-control" id="id" placeholder="Enter Sr.No">
-											</div>
+											</div> -->
                                             <div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Name</label>
-												<input type="text" class="form-control" id="name" placeholder="Enter Name(RoomType)">
+												<input type="text" class="form-control" id="name" placeholder="Enter RoomType">
 											</div>
                                             <div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-light">ADD</button>
+													<button type="button" class="btn btn-light" onclick="sendData()" >ADD</button>
 												</div>
 											</div>
 											
@@ -66,6 +66,30 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+
+?>
+
+<script>
+	function sendData(){
+		$.ajax({
+			url:'../../api/roomTypes/insert.php',
+			type:'POST',
+			data:{
+				name:$('#name').val()
+			},
+			success:function(response){
+				if(response==0)
+				// return window.location='../../pages/RoomTypes';
+
+				window.alert("Data Added Successfully.....");
+				window.location.href='../../pages/RoomTypes';
+			}
+		})
+	}
+</script>
+
+<?php
+
 include pathOf('includes/pageEnd.php');
 
 ?>

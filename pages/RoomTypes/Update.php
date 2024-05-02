@@ -1,6 +1,13 @@
 <?php
 
 require('../../includes/init.php');
+
+$id=$_GET['updateid'];
+
+$query="SELECT * FROM `roomTypes` WHERE Id=?";
+$param=[$id];
+$row = selectOne($query,$param);
+
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
@@ -34,17 +41,18 @@ include pathOf('includes/navbar.php');
 									</div>
 									<div class="form-body">
 										<form class="row g-3">
-											<div class="col-12">
+											<!-- <div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Sr.No</label>
 												<input type="text" class="form-control" id="id" >
-											</div>
+											</div> -->
+											<input type="hidden" id="id" value="<?= $id ?>">
                                             <div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Name</label>
-												<input type="text" class="form-control" id="name" >
+												<input type="text" class="form-control" id="name" value="<?= $row['Name'] ?>">
 											</div>
                                             <div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-light">UPDATE</button>
+													<button type="button" class="btn btn-light" onclick="updateData()" >UPDATE</button>
 												</div>
 											</div>
 											
@@ -66,6 +74,31 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+
+?>
+
+<script>
+	function updateData(){
+		$.ajax({
+			url:'../../api/roomTypes/update.php',
+			type:'POST',
+			data:{
+				id:$('#id').val(),
+				name:$('#name').val()
+			},
+			success:function(response){
+				if(response==0)
+				// return window.location='../../pages/RoomTypes';
+
+				window.alert("Data Updated Succesfully....");
+				window.location.href='../../pages/RoomTypes';
+			}
+		})
+	}
+</script>
+
+<?php
+
 include pathOf('includes/pageEnd.php');
 
 ?>
