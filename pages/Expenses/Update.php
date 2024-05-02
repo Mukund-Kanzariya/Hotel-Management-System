@@ -1,6 +1,12 @@
 <?php
 
 require('../../includes/init.php');
+
+$id=$_GET['updateid'];
+$query="SELECT * FROM `expenses` WHERE Id=?";
+$param=[$id];
+$row=selectOne($query,$param);
+
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
@@ -34,23 +40,24 @@ include pathOf('includes/navbar.php');
 									</div>
 									<div class="form-body">
 										<form class="row g-3">
-											<div class="col-12">
+											<!-- <div class="col-12">
 												<label for="inputEmailAddress" class="form-label">Sr.No</label>
 												<input type="text" class="form-control" id="id" >
-											</div>
+											</div> -->
+											<input type="hidden" id="id" value="<?= $row['Id'] ?>">
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Name</label>
-													<input type="text" class="form-control border-end-0" id="name"  >
+													<input type="text" class="form-control border-end-0" id="name" value="<?= $row['Name'] ?>">
 											</div>
                                             <div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Amount</label>
-													<input type="text" class="form-control border-end-0" id="amount"  >
+													<input type="text" class="form-control border-end-0" id="amount" value="<?= $row['Amount'] ?>" >
 											</div>
 											
 											
 											<div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-light">UPDATE</button>
+													<button type="button" class="btn btn-light" onclick="updateData()">UPDATE</button>
 												</div>
 											</div>
 											
@@ -72,6 +79,31 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+
+?>
+
+<script>
+	function updateData(){
+
+		$.ajax({
+			url:'../../api/Expenses/update.php',
+			type:'POST',
+			data:{
+				id:$('#id').val(),
+				name:$('#name').val(),
+				amount:$('#amount').val()
+			},
+			success:function(response){
+				window.alert("Data Updated Successfully......");
+				window.location.href='../../pages/Expenses';
+			}
+		})
+
+	}
+</script>
+
+<?php
+
 include pathOf('includes/pageEnd.php');
 
 ?>

@@ -1,6 +1,11 @@
 <?php
 
 require ('../../includes/init.php');
+
+$query="SELECT * FROM `expenses`";
+$row=select($query);
+$index=1;
+
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
@@ -44,13 +49,15 @@ include pathOf('includes/navbar.php');
 									</tr>
 								</thead>
 								<tbody>
+									<?php foreach($row as $data) { ?>
 									<tr>
-										<td>10</td>
-										<td>Light Bill</td>
-										<td>50000</td>
-										<td><a href="Update" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
+										<td><?= $index++ ?></td>
+										<td><?= $data['Name'] ?></td>
+										<td><?= $data['Amount'] ?></td>
+										<td><a href="Update?updateid=<?= $data['Id'] ?>" class="btn btn-primary active" aria-current="page">Update</a></td>
+										<td><button class="btn btn-danger active" aria-current="page" onclick="deleteData(<?= $data['Id'] ?>)">Delete</button></td>
 									</tr>
+									<?php } ?>
 								<tfoot>
 								<tr>
 										<th>Sr.No</th>
@@ -69,6 +76,25 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+
+?>
+
+<script>
+	function deleteData(id){
+		if(confirm("Are you sure you want to delete this data.....???"));
+
+		$.post('../../api/Expenses/delete.php',{
+			id:id,
+			success:function(response){
+				window.alert("Data Deleted .....!!!");
+				window.location.href='../../pages/Expenses';
+			}
+		})
+	}
+</script>
+
+<?php
+
 include pathOf('includes/pageEnd.php');
 
 ?>
