@@ -1,6 +1,11 @@
 <?php
 
 require ('../../includes/init.php');
+
+// $row=select("SELECT users.Name,users.Mobile,users.Salary,users.Email,roles.Id AS 'RoleId' FROM `users` INNER JOIN roles ON users.RoleId =roles.Id");
+$query="SELECT * FROM `users`";
+$row=select($query);
+$index=1;
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
@@ -39,32 +44,42 @@ include pathOf('includes/navbar.php');
 										<th>Sr.No</th>
 										<th>RoleName</th>
 										<th>Name</th>
-										<th>Mobile</th>
 										<th>Salary</th>
 										<th>E-mail</th>
+										<th>Mobile</th>
+										<th>Address</th>
+										<th>City</th>
+										<th>State</th>
 										<th>Modify</th>
 										<th>Delete</th>
 									</tr>
 								</thead>
 								<tbody>
+									<?php foreach($row as $data) {?>
 									<tr>
-										<td>Tiger Nixon</td>
-										<td>System Architect</td>
-										<td>Edinburgh</td>
-										<td>61</td>
-										<td>2011/04/25</td>
-										<td>$320,800</td>
-										<td><a href="Update.php" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
-									</tr>
+										<td><?= $index++ ?></td>
+										<td><?= $data['RoleId'] ?></td>
+										<td><?= $data['Name'] ?></td>
+										<td><?= $data['Salary'] ?></td>
+										<td><?= $data['Email'] ?></td>
+										<td><?= $data['Mobile'] ?></td>
+										<td><?= $data['Address'] ?></td>
+										<td><?= $data['City'] ?></td>
+										<td><?= $data['State'] ?></td>
+										<td><a href="Update.php?updateid=<?= $data['Id']?>" class="btn btn-primary active" aria-current="page">Update</a></td>
+										<td><button class="btn btn-danger" type="button" onclick="deleteData(<?= $data['Id']?>)">Delete</button></td>									</tr>
+									<?php  }?>
 								<tfoot>
 								<tr>
 										<th>Sr.No</th>
 										<th>RoleName</th>
 										<th>Name</th>
-										<th>Mobile</th>
 										<th>Salary</th>
 										<th>E-mail</th>
+										<th>Mobile</th>
+										<th>Address</th>
+										<th>City</th>
+										<th>State</th>
 										<th>Modify</th>
 										<th>Delete</th>
 									</tr>
@@ -78,6 +93,25 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+?>
+
+<script>
+	function deleteData(Id){
+		if(confirm("Are you sure you want to delete this data......??"));
+
+		$.post('../../api/Users/delete.php',{
+			id:Id,
+			response:function(response){
+
+				window.alert("User Delete Successfully......!!!");
+				window.location.href='../../pages/Users';
+
+			}
+		});
+	}
+</script>
+
+<?php
 include pathOf('includes/pageEnd.php');
 
 ?>
