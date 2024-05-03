@@ -2,9 +2,9 @@
 
 require ('../../includes/init.php');
 
-// $row=select("SELECT users.Name,users.Mobile,users.Salary,users.Email,roles.Id AS 'RoleId' FROM `users` INNER JOIN roles ON users.RoleId =roles.Id");
-$query="SELECT * FROM `users`";
-$row=select($query);
+$row=select("SELECT users.Id,users.Name,users.Salary,users.Email,users.Mobile,users.Address,users.City,users.State,roles.Name AS 'RoleId' FROM `users` INNER JOIN roles ON users.RoleId =roles.Id");
+// $query="SELECT * FROM `users`";
+// $row=select($query);
 $index=1;
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');

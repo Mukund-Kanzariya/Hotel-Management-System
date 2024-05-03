@@ -28,7 +28,7 @@ include pathOf('includes/navbar.php');
 								</div>
 								<hr>
 								<form class="row g-3">
-                                <div class="col-md-4">
+                                <div class="col-md-6">
 										<label for="inputState" class="form-label">RoleName</label>
 										<select id="roleid" class="form-select">
 											<option selected>Choose Role...</option>

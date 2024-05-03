@@ -34,7 +34,7 @@ include pathOf('includes/navbar.php');
 								</div>
 								<hr>
 								<form class="row g-3">
-									<input type="text" id="id" value="<?= $id ?>"> 
+									<input type="hidden" id="id" value="<?= $id ?>"> 
                                 <div class="col-md-6">
 										<label for="inputState" class="form-label">RoleName</label>
 										<select id="roleid" class="form-select">
