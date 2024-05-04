@@ -21,6 +21,7 @@ CREATE TABLE
         `Address` VARCHAR(500) NOT NULL,
         `City` VARCHAR(200) NOT NULL,
         `State` VARCHAR(200) NOT NULL,
+        `Password` VARCHAR(200) NOT NULL,
         FOREIGN KEY (`RoleId`) REFERENCES `Roles` (`Id`)
     );
 
@@ -95,7 +96,8 @@ INSERT INTO
         Mobile,
         Address,
         City,
-        State
+        State,
+        Password
     )
 VALUES
     (
@@ -106,7 +108,8 @@ VALUES
         9737708721,
         'test',
         'jamnagar',
-        'gujrat'
+        'gujrat',
+        'Admin'
     );
 
 INSERT INTO
