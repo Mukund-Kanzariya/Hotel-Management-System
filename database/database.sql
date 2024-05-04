@@ -15,9 +15,12 @@ CREATE TABLE
         `Id` INT PRIMARY KEY AUTO_INCREMENT,
         `RoleId` INT NOT NULL,
         `Name` VARCHAR(200) NOT NULL,
-        `Mobile` INT NOT NULL,
         `Salary` INT NOT NULL,
         `Email` VARCHAR(200) NOT NULL,
+        `Mobile` INT NOT NULL,
+        `Address` VARCHAR(500) NOT NULL,
+        `City` VARCHAR(200) NOT NULL,
+        `State` VARCHAR(200) NOT NULL,
         FOREIGN KEY (`RoleId`) REFERENCES `Roles` (`Id`)
     );
 
@@ -28,14 +31,14 @@ CREATE TABLE
     );
 
 CREATE TABLE
-    `Permission` (
+    `Permissions` (
         `Id` INT PRIMARY KEY AUTO_INCREMENT,
         `UserId` INT NOT NULL,
         `ModuleId` INT NOT NULL,
-        `Insert` BOOLEAN,
-        `Update` BOOLEAN,
-        `Delete` BOOLEAN,
-        `View` BOOLEAN,
+        `AddPermission` INT NOT NULL,
+        `EditPermission` INT NOT NULL,
+        `DeletePermission` INT NOT NULL,
+        `ViewPermission` INT NOT NULL,
         FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`),
         FOREIGN KEY (`ModuleId`) REFERENCES `Modules` (`Id`)
     );
@@ -77,3 +80,58 @@ CREATE TABLE
         `Name` VARCHAR(2000) NOT NULL,
         `Amount` INT NOT NULL
     );
+
+INSERT INTO
+    Roles (Name)
+VALUES
+    ('admin');
+
+INSERT INTO
+    Users (
+        RoleId,
+        Name,
+        Salary,
+        Email,
+        Mobile,
+        Address,
+        City,
+        State
+    )
+VALUES
+    (
+        1,
+        'admin',
+        '50000',
+        'test@gmail.com',
+        9737708721,
+        'test',
+        'jamnagar',
+        'gujrat'
+    );
+
+INSERT INTO
+    Modules (Name)
+VALUES
+    ('Roles'),
+    ('Users'),
+    ('RoomTypes'),
+    ('Room'),
+    ('Guests'),
+    ('Expenses');
+
+INSERT INTO
+    Permissions (
+        UserId,
+        ModuleId,
+        AddPermission,
+        EditPermission,
+        DeletePermission,
+        ViewPermission
+    )
+VALUES
+    (1, 1, 1, 1, 1, 1),
+    (1, 2, 1, 1, 1, 1),
+    (1, 3, 1, 1, 1, 1),
+    (1, 4, 1, 1, 1, 1),
+    (1, 5, 1, 1, 1, 1),
+    (1, 6, 1, 1, 1, 1);
