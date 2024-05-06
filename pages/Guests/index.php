@@ -1,6 +1,13 @@
 <?php
 
 require ('../../includes/init.php');
+
+
+
+$query="SELECT guests.Id,guests.Name,guests.MobileNo,guests.Address,guests.Email,guests.InTime,guests.OutTime,guests.TotalPrice,guests.IdentityImageFile,rooms.RoomNumber AS AllotedRoomId FROM `guests` INNER JOIN `rooms` ON guests.AllotedRoomId=rooms.Id";
+$row=select($query);
+$index=1;
+
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
@@ -51,20 +58,22 @@ include pathOf('includes/navbar.php');
 									</tr>
 								</thead>
 								<tbody>
+									<?php foreach($row as $data) {?>
 									<tr>
-										<td>10</td>
-										<td>12</td>
-										<td>test</td>
-										<td>9909956026</td>
-										<td>jamnagar</td>
-										<td>test@gmail.com</td>
-										<td>2024/11/11</td>
-										<td>2024/11/15</td>
-										<td>10000</td>
-										<td>ha ha</td>
-										<td><a href="Update.php" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><a href="#" class="btn btn-danger active" aria-current="page">Delete</a></td>
+										<td><?= $index++ ?></td>
+										<td><?= $data['AllotedRoomId'] ?></td>
+										<td><?= $data['Name'] ?></td>
+										<td><?= $data['MobileNo'] ?></td>
+										<td><?= $data['Address'] ?></td>
+										<td><?= $data['Email'] ?></td>
+										<td><?= $data['InTime'] ?></td>
+										<td><?= $data['OutTime'] ?></td>
+										<td><?= $data['TotalPrice'] ?></td>
+										<td><?= $data['IdentityImageFile'] ?></td>
+										<td><a href="Update.php?updateid=<?= $data['Id'] ?>" class="btn btn-primary active" aria-current="page">Update</a></td>
+										<td><button type="submit" class="btn btn-danger active" aria-current="page" onclick="deleteData(<?= $data['Id'] ?>)">Delete</button></td>
 									</tr>
+									<?php } ?>
 								<tfoot>
 								<tr>
 										<th>Sr.No</th>
@@ -73,8 +82,8 @@ include pathOf('includes/navbar.php');
 										<th>Mobile</th>
 										<th>Address</th>
 										<th>E-mail</th>
-										<th>CheckInTime</th>
-										<th>CheckOutTime</th>
+										<th>CheckInDate</th>
+										<th>CheckOutDate</th>
 										<th>TotalPrice</th>
 										<th>IdentityImageFile</th>
 										<th>Modify</th>
@@ -90,6 +99,30 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+
+?>
+
+<script>
+	function deleteData(id){
+
+		if(confirm("Are you sure you want to delete this data.....????"));
+
+		$.post('../../api/Guests/delete.php',{
+			id:id,
+			success:function(response){
+				if(response==0)
+				return window.location='./index.php';
+
+				window.alert("Guest Deleted....!!!!");
+				window.location.href='./index.php';
+			}
+		});
+	}
+</script>
+
+
+<?php
+
 include pathOf('includes/pageEnd.php');
 
 ?>

@@ -1,6 +1,15 @@
 <?php
 
 require('../../includes/init.php');
+
+$room="SELECT * FROM `rooms`";
+$data=select($room);
+
+$id=$_GET['updateid'];
+$query="SELECT * FROM `guests` WHERE Id=?";
+$param=[$id];
+$row=selectOne($query,$param);
+
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
@@ -35,50 +44,53 @@ include pathOf('includes/navbar.php');
 									</div>
 									<div class="form-body">
 										<form class="row g-3">
-											<div class="col-12">
-												<label for="inputEmailAddress" class="form-label">Sr.No</label>
-												<input type="text" class="form-control" id="id">
-											</div>
-                                            <div class="col-12">
-												<label for="inputEmailAddress" class="form-label">AllotedRoomNo</label>
-												<input type="text" class="form-control" id="allotedroomid" >
-											</div>
+											<input type="hidden" id="id" value="<?= $id ?>">
+										  <div class="col-md-12">
+											<label  class="form-label">AllotedRoomNo</label>
+											<select id="allotedroomno" class="form-select" autofocus>
+												<option selected>Choose RoomNumber...</option>
+                                        	    <?php foreach($data as $rooms) {?>
+												<option value="<?= $rooms['Id']?>"><?= $rooms['RoomNumber'] ?></option>
+                                        	    <?php } ?>
+											</select>
+									    	</div>
+                                           
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Name</label>
-													<input type="text" class="form-control border-end-0" id="name"  >
+													<input type="text" class="form-control border-end-0" id="name" value="<?= $row['Name'] ?>" >
 											</div>
                                             <div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Mobile No</label>
-													<input type="text" class="form-control border-end-0" id="mobile"  >
+													<input type="text" class="form-control border-end-0" id="mobile" value="<?= $row['MobileNo'] ?>">
 											</div>
                                             <div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Address</label>
-													<input type="text" class="form-control border-end-0" id="address"  >
+													<input type="text" class="form-control border-end-0" id="address" value="<?= $row['Address'] ?>">
 											</div>
                                             <div class="col-12">
 												<label for="inputChoosePassword" class="form-label">E-mail</label>
-													<input type="text" class="form-control border-end-0" id="email"  >
+													<input type="text" class="form-control border-end-0" id="email" value="<?= $row['Email'] ?>">
 											</div>
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">CheckInTime</label>
-													<input type="text" class="form-control border-end-0" id="intime"  >
+													<input type="text" class="form-control border-end-0" id="intime" value="<?= $row['InTime']?>">
 											</div> <div class="col-12">
 												<label for="inputChoosePassword" class="form-label">CheckOutTime</label>
-													<input type="text" class="form-control border-end-0" id="outtime"  >
+													<input type="text" class="form-control border-end-0" id="outtime" value="<?= $row['OutTime']?>">
 											</div>
 											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">TotalPrice</label>
-													<input type="text" class="form-control border-end-0" id="totalprice"  >
+												<label  class="form-label">TotalPrice</label>
+													<input type="text" class="form-control border-end-0" id="price" vlaue="<?= $row['TotalPrice']?>">
 											</div>
 											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">IdentityImageFile</label>
-													<input type="text" class="form-control border-end-0" id="imagefile"  >
+												<label for="inputfile" class="form-label">IdentityImageFile</label>
+													<input type="file" class="form-control border-end-0" id="image"  value="<?= $row['IdentityImageFile'] ?>">
 											</div>
 											
 											
 											<div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-light">UPDATE</button>
+													<button type="button" class="btn btn-light" onclick="updateData()">Save Changes</button>
 												</div>
 											</div>
 											
@@ -100,6 +112,44 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+
+?>
+
+<script>
+	function updateData(){
+		var form = new FormData();
+			form.append('id',$('#id').val());
+            form.append('allotedroomno', $('#allotedroomno').val());
+            form.append('name', $('#name').val());
+            form.append('mobile', $('#mobile').val());
+            form.append('address', $('#address').val());
+            form.append('email', $('#email').val());
+            form.append('intime', $('#intime').val());
+            form.append('outtime', $('#outtime').val());
+            form.append('price', $('#price').val());
+            form.append('image', $('#image')[0].files[0]);
+
+            $.ajax({
+                url: '../../api/Guests/update.php',
+                type: 'POST',
+                data: form,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+					// console.log(response.success);
+                    if (response.success !== true)
+                        return;
+
+					window.alert("Guests Updated Successfully.....");
+					window.location.href='./index.php';
+					
+                }
+            })
+	}
+</script>
+
+<?php
+
 include pathOf('includes/pageEnd.php');
 
 ?>

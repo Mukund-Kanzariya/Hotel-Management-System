@@ -1,6 +1,15 @@
 <?php
 
 require('../../includes/init.php');
+
+$permissions = authenticate('Guests', 1);
+if ($permissions['AddPermission'] != 1)
+    header('Location: ./index');
+
+
+$query="SELECT Id,RoomNumber FROM `rooms`";
+$row=select($query);
+
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
@@ -35,50 +44,52 @@ include pathOf('includes/navbar.php');
 									</div>
 									<div class="form-body">
 										<form class="row g-3">
+											<div class="col-md-12">
+											<label  class="form-label">AllotedRoomNo</label>
+											<select id="allotedroomno" class="form-select" autofocus>
+												<option selected>Choose RoomNumber...</option>
+                                        	    <?php foreach($row as $data) {?>
+												<option value="<?= $data['Id']?>"><?= $data['RoomNumber'] ?></option>
+                                        	    <?php } ?>
+											</select>
+									    	</div>
+                
 											<div class="col-12">
-												<label for="inputEmailAddress" class="form-label">Sr.No</label>
-												<input type="text" class="form-control" id="id" placeholder="Enter Sr.No">
-											</div>
-                                            <div class="col-12">
-												<label for="inputEmailAddress" class="form-label">AllotedRoomNo</label>
-												<input type="text" class="form-control" id="allotedroomid" placeholder="Enter AllotedRoomNo">
-											</div>
-											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Name</label>
+												<label  class="form-label">Name</label>
 													<input type="text" class="form-control border-end-0" id="name"  placeholder="Enter Name">
 											</div>
                                             <div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Mobile No</label>
+												<label  class="form-label">Mobile No</label>
 													<input type="text" class="form-control border-end-0" id="mobile"  placeholder="Enter Mobile No">
 											</div>
                                             <div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Address</label>
+												<label  class="form-label">Address</label>
 													<input type="text" class="form-control border-end-0" id="address"  placeholder="Enter Address">
 											</div>
                                             <div class="col-12">
-												<label for="inputChoosePassword" class="form-label">E-mail</label>
+												<label  class="form-label">E-mail</label>
 													<input type="text" class="form-control border-end-0" id="email"  placeholder="Enter E-mail">
 											</div>
 											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">CheckInTime</label>
-													<input type="text" class="form-control border-end-0" id="intime"  placeholder="Enter CheckInTime">
+												<label  class="form-label">CheckInDate</label>
+													<input type="date" class="form-control border-end-0" id="intime" >
 											</div> <div class="col-12">
-												<label for="inputChoosePassword" class="form-label">CheckOutTime</label>
-													<input type="text" class="form-control border-end-0" id="outtime"  placeholder="Enter CheckOutTime">
+												<label  class="form-label">CheckOutDate</label>
+													<input type="date" class="form-control border-end-0" id="outtime"  >
 											</div>
 											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">TotalPrice</label>
-													<input type="text" class="form-control border-end-0" id="totalprice"  placeholder="Enter TotalPrice">
+												<label  class="form-label">TotalPrice</label>
+													<input type="text" class="form-control border-end-0" id="price"  placeholder="Enter TotalPrice">
 											</div>
 											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">IdentityImageFile</label>
-													<input type="text" class="form-control border-end-0" id="imagefile"  placeholder="Enter IdentityImageFile">
+												<label  class="form-label">IdentityImageFile</label>
+													<input type="file" class="form-control border-end-0" id="image"  placeholder="Enter IdentityImageFile">
 											</div>
 											
 											
 											<div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-light">ADD</button>
+												<button type="button" class="btn btn-light" onclick="sendData()">ADD </button>
 												</div>
 											</div>
 											
@@ -100,6 +111,45 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+
+?>
+
+<script>
+	function sendData() {
+            var form = new FormData();
+            form.append('allotedroomno', $('#allotedroomno').val());
+            form.append('name', $('#name').val());
+            form.append('mobile', $('#mobile').val());
+            form.append('address', $('#address').val());
+            form.append('email', $('#email').val());
+            form.append('intime', $('#intime').val());
+            form.append('outtime', $('#outtime').val());
+            form.append('price', $('#price').val());
+            form.append('image', $('#image')[0].files[0]);
+
+            $.ajax({
+                url: '../../api/Guests/insert.php',
+                type: 'POST',
+                data: form,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+					// console.log(response.success);
+                    if (response.success !== true)
+                        return;
+
+					window.alert("Guests Added.....");
+					window.location.href='./index.php';
+					
+                }
+            })
+        }
+
+</script>
+
+<?php
+
 include pathOf('includes/pageEnd.php');
 
 ?>
+ 
