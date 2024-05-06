@@ -1,6 +1,16 @@
 <?php
 
 require('../../includes/init.php');
+
+$query1="SELECT * FROM `roomtypes`";
+$row=select($query1);
+
+$id=$_GET['updateid'];
+
+$query="SELECT * FROM `rooms` WHERE Id=? ";
+$param=[$id];
+$row1=selectOne($query,$param);
+
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
@@ -32,35 +42,37 @@ include pathOf('includes/navbar.php');
 										<h5 class="">Update Room</h5>
 									</div>
 									<div class="form-body">
-										<form class="row g-3">
-											<div class="col-12">
-												<label for="inputEmailAddress" class="form-label">Sr.No</label>
-												<input type="text" class="form-control" id="id" >
+									<form class="row g-3">
+											<input type="hidden" id="id" value="<?= $id ?>">
+											<div class="col-md-12">
+											<label  class="form-label">RoomType</label>
+											<select id="roomtypeid" class="form-select">
+												<option selected>Choose RoomType...</option>
+												<?php foreach($row as $data) {?>
+												<option value="<?= $data['Id'] ?>"><?= $data['Name'] ?></option>
+												<?php } ?>
+											</select>
 											</div>
-                                            <div class="col-12">
-												<label for="inputEmailAddress" class="form-label">RoomTypeNo</label>
-												<input type="text" class="form-control" id="roomtypeid" >
-											</div>
-											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">RoomNumber</label>
-													<input type="text" class="form-control border-end-0" id="roomnumber"  >
-											</div>
-                                            <div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Price</label>
-													<input type="text" class="form-control border-end-0" id="price"  >
-											</div>
-                                            <div class="col-12">
-												<label for="inputChoosePassword" class="form-label">IsAvailable</label>
-													<input type="text" class="form-control border-end-0" id="isavailable"  >
-											</div>
-
-                                            <div class="col-12">
-												<div class="d-grid">
-													<button type="submit" class="btn btn-light">UPDATE</button>
+												<div class="col-12">
+													<label  class="form-label">RoomNumber</label>
+														<input type="text" class="form-control border-end-0" id="roomnumber" value="<?= $row1['RoomNumber'] ?>">
 												</div>
-											</div>
-											
-										</form>
+												<div class="col-12">
+													<label  class="form-label">Price</label>
+														<input type="text" class="form-control border-end-0" id="price" value=" <?= $row1['Price'] ?>" >
+												</div>
+												<div class="col-12">
+													<label  class="form-label">IsAvailable</label>
+														<input type="text" class="form-control border-end-0" id="isavailable" value="<?= $row1['IsAvailable'] ?>">
+												</div>
+	
+												<div class="col-12">
+													<div class="d-grid">
+														<button type="button" class="btn btn-light" onclick="updateData()">Save Changes</button>
+													</div>
+												</div>
+												
+											</form>
 									</div>
 								</div>
 							</div>
@@ -78,6 +90,35 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+
+?>
+
+<script>
+	function updateData(){
+		$.ajax({
+			url:'../../api/Rooms/update',
+			type:'POST',
+			data:{
+				id:$('#id').val(),
+				roomtypeid:$('#roomtypeid').val(),
+				roomnumber:$('#roomnumber').val(),
+				price:$('#price').val(),
+				isavailable:$('#isavailable').val()
+			},
+			success:function(response){
+				if(response==0)
+				// return window.location='../../pages/Rooms';
+
+				window.alert("Data Updated Successfully....");
+				window.location.href='./index.php';
+
+			}
+		})
+	}
+</script>
+
+<?php
+
 include pathOf('includes/pageEnd.php');
 
 ?>

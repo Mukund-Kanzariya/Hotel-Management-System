@@ -1,10 +1,19 @@
 <?php
 
 require('../../includes/init.php');
+
+// $permissions = authenticate('Rooms', 1);
+// if ($permissions['AddPermission'] != 1)
+//     header('Location: ./index');
+
+$query="SELECT * FROM `roomtypes`";
+$row=select($query);
+
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
 ?>
+
 <div class="page-wrapper">
 			<div class="page-content">
 		<div class="section-authentication-cover">
@@ -33,30 +42,32 @@ include pathOf('includes/navbar.php');
 									</div>
 									<div class="form-body">
 										<form class="row g-3">
+											
+										<div class="col-md-12">
+										<label  class="form-label">RoomType</label>
+										<select id="roomtypeid" class="form-select">
+											<option selected>Choose RoomType...</option>
+                                            <?php foreach($row as $data) {?>
+											<option value="<?= $data['Id'] ?>"><?= $data['Name'] ?></option>
+                                            <?php } ?>
+										</select>
+									    </div>
 											<div class="col-12">
-												<label for="inputEmailAddress" class="form-label">Sr.No</label>
-												<input type="text" class="form-control" id="id" placeholder="Enter Sr.No">
+												<label  class="form-label">RoomNumber</label>
+													<input type="text" class="form-control border-end-0" id="roomnumber"  placeholder="Enter roomnumber" autofocus>
 											</div>
                                             <div class="col-12">
-												<label for="inputEmailAddress" class="form-label">RoomTypeNo</label>
-												<input type="text" class="form-control" id="roomtypeid" placeholder="Enter RoomTypeNo">
-											</div>
-											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">RoomNumber</label>
-													<input type="text" class="form-control border-end-0" id="roomnumber"  placeholder="Enter roomnumber">
-											</div>
-                                            <div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Price</label>
+												<label  class="form-label">Price</label>
 													<input type="text" class="form-control border-end-0" id="price"  placeholder="Enter Price">
 											</div>
                                             <div class="col-12">
-												<label for="inputChoosePassword" class="form-label">IsAvailable</label>
-													<input type="text" class="form-control border-end-0" id="isavailable"  placeholder="IsAvailable">
+												<label  class="form-label">IsAvailable</label>
+													<input type="text" class="form-control border-end-0" id="isavailable"  placeholder="Enter yes=1 no=0">
 											</div>
 
                                             <div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-light">ADD</button>
+													<button type="button" class="btn btn-light" onclick="sendData()">ADD</button>
 												</div>
 											</div>
 											
@@ -78,6 +89,35 @@ include pathOf('includes/navbar.php');
 
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
+
+?>
+
+<script>
+	function sendData(){
+		// window.alert($('#roomtypeid').val());
+		$.ajax({
+			url:'../../api/Rooms/insert.php',
+			type:'POST',
+			data: {
+				roomtypeid:$('#roomtypeid').val(),
+				roomnumber:$('#roomnumber').val(),
+				price:$('#price').val(),
+				isavailable:$('#isavailable').val()
+			},
+			success:function(response){
+				if(response==0)
+				// return window.location='../../pages/Rooms';
+
+				window.alert("Data Added Successfully....");
+				window.location.href='./index.php';
+
+			}
+		})
+	}
+</script>
+
+<?php
+
 include pathOf('includes/pageEnd.php');
 
 ?>
