@@ -25,7 +25,7 @@ require ('../../includes/init.php');
 	<!-- Bootstrap CSS -->
 	<link href="<?= urlOf('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
 	<link href="<?= urlOf('assets/css/bootstrap-extended.css') ?>" rel="stylesheet">
-	<link href="<?= urlOf('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap') ?>" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
 	<link href="<?= urlOf('assets/css/app.css') ?>" rel="stylesheet">
 	<link href="<?= urlOf('assets/css/icons.css') ?>" rel="stylesheet">
 	<title>Hotel-Management-System</title>
@@ -55,7 +55,7 @@ require ('../../includes/init.php');
 												<input type="text" class="form-control" id="username" placeholder="Enter UserName">
 											</div>
 											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Password</label>
+												<label  class="form-label">Password</label>
 												<div class="input-group" id="show_hide_password">
 													<input type="password" class="form-control border-end-0" id="password"  placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
 												</div>
@@ -232,23 +232,43 @@ require ('../../includes/init.php');
 
 
 
-<script>
+<!-- <script>
 	function sendData() {
 		var data = {
             username: $('#username').val(),
             password: $('#password').val()
         }
 
-        $.post('../../api/login.php', data, function (response) {
-            console.log(response);
-            if (response.success !== true)
-                return;
+        $.post('../../api/login.php', data, function(response) {
+                console.log(response);
+                if (response.success !== true)
+                    return;
 
-			window.alert("Login Succesfully.......");
-			window.location.href='../../';        
-		});
+                window.location.href = '../../index';
+            });
+			aa pan chale
     }
-</script>
+</script> -->
+
+	<script>
+		function sendData(){
+			$.post('../../api/login.php',{
+				username:$('#username').val(),
+				password:$('#password').val(),
+
+				success:function(response){
+					if (response == 0){
+						window.alert("Login Fail.....!!");
+						return;
+					}else{
+						window.alert("Login Successfully........");
+						window.location.href = '../../';
+					}
+				}
+			});
+		}
+	</script>
+
 
 	</body>
 	
