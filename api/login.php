@@ -19,5 +19,4 @@ if ($result) {
     echo json_encode(["success" => false]);
 }
 
-
 ?>
