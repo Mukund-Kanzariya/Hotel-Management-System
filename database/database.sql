@@ -15,13 +15,13 @@ CREATE TABLE
         `Id` INT PRIMARY KEY AUTO_INCREMENT,
         `RoleId` INT NOT NULL,
         `Name` VARCHAR(200) NOT NULL,
+        `Password` VARCHAR(200) NOT NULL,
         `Salary` INT NOT NULL,
         `Email` VARCHAR(200) NOT NULL,
         `Mobile` INT NOT NULL,
         `Address` VARCHAR(500) NOT NULL,
         `City` VARCHAR(200) NOT NULL,
         `State` VARCHAR(200) NOT NULL,
-        `Password` VARCHAR(200) NOT NULL,
         FOREIGN KEY (`RoleId`) REFERENCES `Roles` (`Id`)
     );
 
@@ -91,25 +91,25 @@ INSERT INTO
     Users (
         RoleId,
         Name,
+        Password,
         Salary,
         Email,
         Mobile,
         Address,
         City,
-        State,
-        Password
+        State
     )
 VALUES
     (
         1,
+        'admin',
         'admin',
         '50000',
         'test@gmail.com',
         9737708721,
         'test',
         'jamnagar',
-        'gujrat',
-        'Admin'
+        'gujrat'
     );
 
 INSERT INTO
