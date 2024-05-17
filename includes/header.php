@@ -1,3 +1,13 @@
+<?php
+
+$url = urlOf('pages/Login');
+if (!isset($_SESSION['LoggedIn'])) {
+    header("Location: $url");
+    exit;	
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -24,8 +34,6 @@
 	<link href="<?=urlOf('assets/css/app.css')?>" rel="stylesheet">
 	<link href="<?=urlOf('assets/css/icons.css')?>" rel="stylesheet">
 	
-	<title>Dashtrans - Bootstrap5 Admin Template</title>
+	<title>HotelManagementSystem</title>
 </head>
-<body class="bg-theme bg-theme2">
-<div class="wrapper">
 
