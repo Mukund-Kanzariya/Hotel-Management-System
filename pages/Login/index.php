@@ -45,7 +45,7 @@ require ('../../includes/init.php');
 										<img src="<?= urlOf('assets/images/logo-icon.png') ?>" width="60" alt="" />
 									</div>
 									<div class="text-center mb-4">
-										<h5 class="">StayComfirt</h5>
+										<h5 class="">StayComfirt Admin</h5>
 										<p class="mb-0">Please log in to your account</p>
 									</div>
 									<div class="form-body">
@@ -257,13 +257,11 @@ require ('../../includes/init.php');
 				password:$('#password').val(),
 
 				success:function(response){
-					if (response == 0){
-						window.alert("Login Fail.....!!");
+					if (response == 0)
 						return;
-					}else{
+					
 						window.alert("Login Successfully........");
 						window.location.href = '../../';
-					}
 				}
 			});
 		}
