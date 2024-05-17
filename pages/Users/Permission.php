@@ -2,12 +2,14 @@
 
 require ('../../includes/init.php');
 
-include pathOf('includes/header.php');
-include pathOf('includes/navbar.php');
 
 $id = $_POST['id'];
-$permissions = select("SELECT modules.Name,permissions.AddPermission, permissions.EditPermission, permissions.DeletePermission, permissions.ViewPermission FROM permissions INNER JOIN users ON users.Id = permissions.UserId INNER JOIN modules ON modules.Id = permissions.ModuleId WHERE permissions.UserId = ?", [$id]);
+$permissions = select("SELECT modules.Name,permissions.ModuleId,permissions.AddPermission, permissions.EditPermission, permissions.DeletePermission, permissions.ViewPermission FROM permissions INNER JOIN users ON users.Id = permissions.UserId INNER JOIN modules ON modules.Id = permissions.ModuleId WHERE permissions.UserId = ?", [$id]);
+
 $index = 0;
+
+include pathOf('includes/header.php');
+include pathOf('includes/navbar.php');
 
 ?>
 
@@ -27,13 +29,13 @@ $index = 0;
 							</ol>
 						</nav>
 					</div>
-					<div class="ms-auto">
+					<!-- <div class="ms-auto">
 							<button type="button" class="btn btn-light"><a href="Add.php">ADD USER</a></button>
-					</div>
+					</div> -->
 					
 				</div>
 				<!--end breadcrumb-->
-				<h6 class="mb-0 text-uppercase">USERS DATA</h6>
+				<h6 class="mb-0 text-uppercase">PERMISSIONS </h6>
 				<hr/>
 				<div class="card">
 					<div class="card-body">
@@ -52,18 +54,19 @@ $index = 0;
                                     <tbody>
                                         <?php foreach ($permissions as $permission): ?>
                                             <tr>
+                                                <input type="hidden" id="UserId" value="<?= $id ?>">
                                                 <td><?= $index += 1 ?></td>
                                                 <td><?= $permission['Name'] ?></td>
-                                                <td><input class="form-check-input me-1" <?= $permission['AddPermission'] == 1 ? 'checked' : '' ?> type="checkbox" id="firstCheckbox">
+                                                <td><input class="form-check-input me-1" <?= $permission['AddPermission'] == 1 ? 'checked' : '' ?> type="checkbox" id="addpermission" onchange="addPermission(<?= $permission['ModuleId'] ?>,<?= $permission['AddPermission'] ?>)">
                                                 </td>
-                                                <td><input class="form-check-input me-1" <?= $permission['EditPermission'] == 1 ? 'checked' : '' ?> type="checkbox" id="firstCheckbox">
+                                                <td><input class="form-check-input me-1" <?= $permission['EditPermission'] == 1 ? 'checked' : '' ?> type="checkbox" id="editpermission" onchange="editPermission(<?= $permission['ModuleId']?>,<?= $permission['DeletePermission'] ?>)">
                                                 </td>
-                                                <td><input class="form-check-input me-1" <?= $permission['ViewPermission'] == 1 ? 'checked' : '' ?> type="checkbox" id="firstCheckbox">
+                                                <td><input class="form-check-input me-1" <?= $permission['ViewPermission'] == 1 ? 'checked' : '' ?> type="checkbox" id="viewpermission" onchange="viewPermission(<?= $permission['ModuleId']?> , <?= $permission['ViewPermission'] ?>)">
                                                 </td>
-                                                <td><input class="form-check-input me-1" <?= $permission['DeletePermission'] == 1 ? 'checked' : '' ?> type="checkbox" id="firstCheckbox">
+                                                <td><input class="form-check-input me-1" <?= $permission['DeletePermission'] == 1 ? 'checked' : '' ?> type="checkbox" id="deletepermission" onchange="deletePermission(<?= $permission['ModuleId'] ?> , <?= $permission['DeletePermission'] ?>)">
                                                 </td>
                                             </tr>
-                                        <?php endforeach; ?>
+                                        <?php endforeach; ?>    
 								<tfoot>
 								       <tr>
                                              <th>Sr No.</th>
@@ -84,24 +87,79 @@ $index = 0;
 include pathOf('includes/footer.php');
 include pathOf('includes/scripts.php');
 ?>
-
 <script>
-	function deleteData(Id){
-		if(confirm("Are you sure you want to delete this data......??"));
+        function addPermission(moduleId, permission) {
+            let addPermission = permission == 1 ? 0 : 1;
 
-		$.post('../../api/Users/delete.php',{
-			id:Id,
-			response:function(response){
+            let data = {
+                userId: $('#UserId').val(),
+                moduleId: moduleId,
+                addPermission: addPermission
+            }
 
-				window.alert("User Delete Successfully......!!!");
-				window.location.href='../../pages/Users';
+            $.post('../../api/updatePermission.php?action=addPermission', data, function (response) {
+                console.log(response.success);
+                if (response.success !== true)
+                    return;
 
-			}
-		});
-	}
-</script>
+                window.location.reload();
+            });
+        }
 
-<?php
+        function editPermission(moduleId, permission) {
+            let editPermission = permission == 1 ? 0 : 1;
+            
+            let data = {
+                userId: $('#UserId').val(),
+                moduleId: moduleId,
+                editPermission: editPermission
+            }
+
+            $.post('../../api/updatePermission.php?action=editPermission', data, function (response) {
+                console.log(response.success);
+                if (response.success !== true)
+                    return;
+
+                window.location.reload();
+            });
+        }
+
+        function deletePermission(moduleId, permission) {
+            let deletePermission = permission == 1 ? 0 : 1;
+
+            let data = {
+                userId: $('#UserId').val(),
+                moduleId: moduleId,
+                deletePermission: deletePermission
+            }
+
+            $.post('../../api/updatePermission.php?action=deletePermission', data, function (response) {
+                console.log(response.success);
+                if (response.success !== true)
+                    return;
+
+                window.location.reload();
+            });
+        }
+
+        function viewPermission(moduleId, permission) {
+            let viewPermission = permission == 1 ? 0 : 1;
+
+            let data = {
+                userId: $('#UserId').val(),
+                moduleId: moduleId,
+                viewPermission: viewPermission
+            }
+
+            $.post('../../api/updatePermission.php?action=viewPermission', data, function (response) {
+                console.log(response.success);
+                if (response.success !== true)
+                    return;
+
+                window.location.reload();
+            });
+        }
+    </script><?php
 include pathOf('includes/pageEnd.php');
 
 ?>

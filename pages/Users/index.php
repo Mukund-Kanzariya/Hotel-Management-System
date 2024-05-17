@@ -51,7 +51,7 @@ include pathOf('includes/navbar.php');
 										<th>City</th>
 										<th>State</th>
 										<th>Modify</th>
-										<th>Delete</th>
+										<th>Permission</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -67,7 +67,10 @@ include pathOf('includes/navbar.php');
 										<td><?= $data['City'] ?></td>
 										<td><?= $data['State'] ?></td>
 										<td><a href="Update.php?updateid=<?= $data['Id']?>" class="btn btn-primary active" aria-current="page">Update</a></td>
-										<td><button class="btn btn-danger" type="button" onclick="deleteData(<?= $data['Id']?>)">Delete</button></td>									</tr>
+										<form action="<?= urlOf('pages/Users/Permission') ?>" method="post">
+											<input type="hidden" name="id" value="<?= $data['Id'] ?>">
+											<td><button class="btn btn-primary" type="submit">Permission</button></td>									</tr>
+										</form>
 									<?php  }?>
 								<tfoot>
 								<tr>
@@ -81,7 +84,7 @@ include pathOf('includes/navbar.php');
 										<th>City</th>
 										<th>State</th>
 										<th>Modify</th>
-										<th>Delete</th>
+										<th>Permission</th>
 									</tr>
 								</tfoot>
 							</table>

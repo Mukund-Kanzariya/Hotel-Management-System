@@ -2,6 +2,10 @@
 
 require('../../includes/init.php');
 
+$permissions = authenticate('Users', 1);
+if ($permissions['AddPermission'] != 1)
+    header('Location: ./index');
+
 $query="SELECT * FROM `roles`";
 
 $row=select($query);
@@ -30,7 +34,7 @@ include pathOf('includes/navbar.php');
 								<form class="row g-3">
                                 <div class="col-md-6">
 										<label for="inputState" class="form-label">RoleName</label>
-										<select id="roleid" class="form-select">
+										<select id="roleid" class="form-select" autofocus>
 											<option selected>Choose Role...</option>
                                             <?php foreach($row as $data) {?>
 											<option value="<?= $data['Id'] ?>"><?= $data['Name'] ?></option>
@@ -41,6 +45,12 @@ include pathOf('includes/navbar.php');
 										<label for="inputLastName" class="form-label">Name</label>
 										<input  class="form-control" id="name" placeholder="Enter UserName">
 									</div>
+									<div class="col-6">
+												<label for="inputChoosePassword" class="form-label">Password</label>
+												<div class="input-group" id="show_hide_password">
+													<input type="password" class="form-control border-end-0" id="password"  placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+												</div>
+											</div>
                                     <div class="col-md-6">
 										<label for="inputLastName" class="form-label">Salary</label>
 										<input  class="form-control" id="salary" placeholder="Enter Salary">
@@ -87,6 +97,7 @@ function sendData(){
 		data: {
 			roleid:$('#roleid').val(),
 			name:$('#name').val(),
+			password:$('#password').val(),
 			salary:$('#salary').val(),
 			email:$('#email').val(),
 			mobile:$('#mobile').val(),
@@ -99,7 +110,7 @@ function sendData(){
 			// return window.location='../../pages/Users'; 
 
 			window.alert("User Added........");
-			window.location.href='../../pages/Users';
+			window.location.href='./index';
 		}
 	})
 }
