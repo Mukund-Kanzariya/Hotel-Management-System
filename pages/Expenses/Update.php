@@ -2,6 +2,12 @@
 
 require('../../includes/init.php');
 
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Expenses', $UserId);
+
+if ($permissions['EditPermission'] != 1)
+    header('Location: ./index');
+
 $id=$_GET['updateid'];
 $query="SELECT * FROM `expenses` WHERE Id=?";
 $param=[$id];

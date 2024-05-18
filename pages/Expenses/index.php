@@ -2,6 +2,9 @@
 
 require ('../../includes/init.php');
 
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Expenses', $UserId);
+
 $query="SELECT * FROM `expenses`";
 $row=select($query);
 $index=1;
@@ -27,9 +30,11 @@ include pathOf('includes/navbar.php');
 							</ol>
 						</nav>
 					</div>
+					<?php if ($permissions['AddPermission'] == 1) { ?>
 					<div class="ms-auto">
-							<button type="button" class="btn btn-light"><a href="Add">ADD EXPENSE</a></button>
+					<button type="button" class="btn btn-light"><a href="Add">ADD EXPENSE</a></button>
 					</div>
+					<?php } ?>
 					
 				</div>
 				<!--end breadcrumb-->
@@ -38,36 +43,51 @@ include pathOf('includes/navbar.php');
 				<div class="card">
 					<div class="card-body">
 						<div class="table-responsive">
+							<?php if($permissions['ViewPermission']==1) { ?>
 							<table id="example" class="table table-striped table-bordered" style="width:100%">
 								<thead>
 									<tr>
 										<th>Sr.No</th>
 										<th>Expense Name</th>
 										<th>Amount</th>
-										<th>Modify</th>
-										<th>Delete</th>
+										<?php if ($permissions['EditPermission'] == 1) { ?>
+                                                <th>Modify</th>
+                                            <?php } ?>
+                                            <?php if ($permissions['DeletePermission'] == 1) { ?>
+                                                <th>Delete</th>
+                                            <?php } ?>
 									</tr>
 								</thead>
 								<tbody>
-									<?php foreach($row as $data) { ?>
+									<?php if ($permissions['ViewPermission'] == 1) { 
+										 foreach($row as $data) { ?>
 									<tr>
 										<td><?= $index++ ?></td>
 										<td><?= $data['Name'] ?></td>
 										<td><?= $data['Amount'] ?></td>
+										<?php if($permissions['EditPermission'] == 1) { ?>
 										<td><a href="Update?updateid=<?= $data['Id'] ?>" class="btn btn-primary active" aria-current="page">Update</a></td>
+										<?php } ?>
+										<?php if($permissions['DeletePermission']==1) { ?>
 										<td><button class="btn btn-danger active" aria-current="page" onclick="deleteData(<?= $data['Id'] ?>)">Delete</button></td>
+										<?php } ?>
 									</tr>
-									<?php } ?>
+									<?php } } ?>
 								<tfoot>
 								<tr>
 										<th>Sr.No</th>
 										<th>Expense Name</th>
 										<th>Amount</th>
+										<?php if($permissions['EditPermission'] == 1) {?>
 										<th>Modify</th>
+										<?php }?>
+										<?php if($permissions['DeletePermission'] == 1) {?>
 										<th>Delete</th>
+										<?php }?>
 									</tr>
 								</tfoot>
 							</table>
+							<?php } ?>
 						</div>
 					</div>
 				</div>

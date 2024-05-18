@@ -1,6 +1,13 @@
 <?php
 
 require('../../includes/init.php');
+
+$UserId = $_SESSION['UserId'];
+$permissions = authenticate('Expenses', $UserId);
+if ($permissions['AddPermission'] != 1)
+    header('Location: ./index');
+
+
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
@@ -40,7 +47,7 @@ include pathOf('includes/navbar.php');
 											</div> -->
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Name</label>
-													<input type="text" class="form-control border-end-0" id="name"  placeholder="Enter Expense Name">
+													<input type="text" class="form-control border-end-0" id="name"  placeholder="Enter Expense Name" autofocus>
 											</div>
                                             <div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Amount</label>
@@ -85,7 +92,7 @@ include pathOf('includes/scripts.php');
 			},
 			success:function(response){
 				if(response==0)
-				window.location='../../pages/Expenses';
+				// window.location='../../pages/Expenses';
 
 				window.alert("Data Added Successfully......");
 				window.location.href='../../pages/Expenses';
