@@ -1,6 +1,13 @@
 <?php
 
 require('../../includes/init.php');
+
+$UserId=$_SESSION['UserId'];
+$permission=authenticate('Roles',$UserId);
+
+if($permission['AddPermission']!=1)
+	header('Location:./index');
+
 include pathOf('includes/header.php');
 include pathOf('includes/navbar.php');
 
@@ -27,7 +34,7 @@ include pathOf('includes/navbar.php');
 							<div class="card-body p-sm-5">
 								<div class="">
 									<div class="mb-3 text-center">
-										<img src="<?= urlOf('assets/images/logo-icon.png') ?>" width="60" alt="">
+										<img src="<?= urlOf('assets/images/logo.png') ?>" height="100px" width="100px"  alt="">
 									</div>
 									<div class="text-center mb-4">
 										<h5 class="">Add Role</h5>
@@ -36,12 +43,12 @@ include pathOf('includes/navbar.php');
 										<form class="row g-3">
 											<div class="col-12">
 												<label for="inputChoosePassword" class="form-label">Name</label>
-													<input type="text" class="form-control border-end-0" id="name"  placeholder="Enter Role Name">
+													<input type="text" class="form-control border-end-0" id="name"  placeholder="Enter Role Name" autofocus>
 											</div>
 											
 											<div class="col-12">
 												<div class="d-grid">
-													<button type="submit" class="btn btn-light" onclick="sendData()">ADD</button>
+													<button type="button" class="btn btn-light" onclick="sendData()">ADD</button>
 												</div>
 											</div>
 											
@@ -74,9 +81,13 @@ include pathOf('includes/scripts.php');
 			data: {
 				name: $('#name').val()
 			},
-			success:function(response) {
-            window.alert("Role Added.......");
-            window.location.href = '../../pages/Roles/index.php';
+			success:function(response){
+				if(response == 0)
+				// return window.location='../../pages/Roles/index.php';
+
+				
+				window.alert("Role Added Successfully......");
+				window.location.href='./index.php';
 			}
 		})
 	}

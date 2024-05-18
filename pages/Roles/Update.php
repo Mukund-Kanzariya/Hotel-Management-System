@@ -2,6 +2,12 @@
 
 require('../../includes/init.php');
 
+$UserId=$_SESSION['UserId'];
+$permission=authenticate('Roles',$UserId);
+
+if($permission['EditPermission']!=1)
+	header('Location:./index');
+
 $id=$_GET['updateid'];
 
 $query="SELECT * FROM `roles` WHERE Id=?";

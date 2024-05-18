@@ -2,6 +2,9 @@
 
 require ('../../includes/init.php');
 
+$UserId=$_SESSION['UserId'];
+$permission=authenticate('Roles',$UserId);
+
 $query="SELECT * FROM `roles`";
 $row = select($query);
 
@@ -30,13 +33,16 @@ include pathOf('includes/navbar.php');
 						</nav>
 					</div>
 					<div class="ms-auto">
-							<button type="button" class="btn btn-light"><a href="Add.php">ADD ROLE</a></button>
+						<?php if($permission['AddPermission'] == 1) { ?>
+							<button type="button" class="btn btn-light"><a href="Add">ADD ROLE</a></button>
+						<?php } ?>
 					</div>
 					
 				</div>
 				<!--end breadcrumb-->
 				<h6 class="mb-0 text-uppercase">ROLES DATA</h6>
 				<hr/>
+				<?php if($permission['ViewPermission'] == 1) {?>
 				<div class="card">
 					<div class="card-body">
 						<div class="table-responsive">
@@ -45,8 +51,12 @@ include pathOf('includes/navbar.php');
 									<tr>
 										<th>Sr.No</th>
 										<th>Role Name</th>
+										<?php if($permission['EditPermission'] == 1) {?>
 										<th>Modify</th>
+										<?php } ?>
+										<?php if($permission['DeletePermission'] == 1) { ?>
 										<th>Delete</th>
+										<?php } ?>
 									</tr>
 								</thead>
 								<tbody>
@@ -54,22 +64,31 @@ include pathOf('includes/navbar.php');
 									<tr>
 										<td><?= $index++ ?></td>
 										<td><?= $data['Name'] ?></td>
+										<?php if($permission['EditPermission']==1) { ?>
 										<td><a href="Update.php?updateid=<?= $data['Id']?>" class="btn btn-primary active" aria-current="page">Update</a></td>
+										<?php } ?>
+										<?php if($permission['DeletePermission'] == 1) { ?>
 										<td><button class="btn btn-danger" type="button" onclick="deleteData(<?= $data['Id']?>)">Delete</button></td>
+										<?php } ?>
 									</tr>
 									<?php }?>
 								<tfoot>
 								<tr>
-										<th>Sr.No</th>
+								 		<th>Sr.No</th>
 										<th>Role Name</th>
+										<?php if($permission['EditPermission'] == 1) {?>
 										<th>Modify</th>
+										<?php } ?>
+										<?php if($permission['DeletePermission'] == 1) { ?>
 										<th>Delete</th>
+										<?php } ?>
 									</tr>
 								</tfoot>
 							</table>
 						</div>
 					</div>
 				</div>
+				<?php } ?>
 	
 <?php
 
@@ -80,16 +99,19 @@ include pathOf('includes/scripts.php');
 
 <script>
     function deleteData(id){
-        confirmation = confirm("Are you sure you want to delete this Role..???");
-        if (!confirmation)
-            return;
+		if(confirm("Are you sure you want to delete this data.....???"));
 
-        $.post('../../api/Roles/delete.php', { 
-			id: id }, 
-		function(response) {
-            window.alert("Role Deleted....!!!");
-            window.location.href = '../../pages/Roles/index.php';
-        });
+		$.post('../../api/Roles/delete.php',{
+			id:id,
+			success:function(response){
+				if(response==0)
+				return window.location='../../pages/Roles';
+
+				window.alert("Data deleted Successfully.....");
+				window.location.href='../../pages/Roles';
+			}
+		});
+
     }
 </script>
 
